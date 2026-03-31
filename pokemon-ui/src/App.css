@@ -1,0 +1,259 @@
+/* Header */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #cc0000;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.app-header h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.count-label {
+  margin-left: auto;
+  font-size: 0.85rem;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+/* Search */
+.search-bar input {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.95rem;
+  width: 260px;
+  outline: none;
+  background: rgba(255,255,255,0.9);
+}
+
+/* Grid */
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem 0;
+}
+
+/* Card */
+.pokemon-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 0.75rem 0.5rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.pokemon-card:hover, .pokemon-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  outline: none;
+}
+
+.pokemon-card img {
+  width: 88px;
+  height: 88px;
+  image-rendering: pixelated;
+}
+
+.pokemon-id {
+  font-size: 0.7rem;
+  color: #999;
+  margin-top: 0.25rem;
+}
+
+.pokemon-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-top: 0.1rem;
+  text-align: center;
+}
+
+/* Load more */
+.load-more-row {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0 2rem;
+}
+
+.load-more-btn {
+  background: #cc0000;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.8rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.load-more-btn:hover { background: #aa0000; }
+
+.all-loaded, .loading {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Error */
+.error-banner {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  color: #856404;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2rem 1.5rem;
+  max-width: 420px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+  line-height: 1;
+}
+
+.modal-sprite {
+  display: block;
+  width: 120px;
+  height: 120px;
+  image-rendering: pixelated;
+  margin: 0 auto 0.5rem;
+}
+
+.modal h2 {
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.modal h3 {
+  margin: 1rem 0 0.4rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #555;
+}
+
+/* Type badges */
+.type-badges {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.badge {
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  letter-spacing: 0.4px;
+}
+
+/* Detail grid */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem 0;
+  font-size: 0.88rem;
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+}
+
+.detail-grid span:nth-child(odd) { color: #888; }
+.detail-grid span:nth-child(even) { font-weight: 600; }
+
+/* Stats */
+.stats { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 36px;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+
+.stat-name { text-transform: capitalize; color: #555; }
+
+.stat-bar-bg {
+  background: #e0e0e0;
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.stat-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: #cc0000;
+  transition: width 0.4s ease;
+}
+
+.stat-val { text-align: right; font-weight: 600; }
+
+/* Abilities */
+.ability-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.ability-list li {
+  background: #f0f0f0;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.82rem;
+  text-transform: capitalize;
+}
+
+.ability-list em { color: #999; font-style: italic; }
