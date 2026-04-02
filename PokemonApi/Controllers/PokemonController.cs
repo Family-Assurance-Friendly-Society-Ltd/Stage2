@@ -9,23 +9,17 @@ namespace PokemonApi.Controllers;
 [Route("api/[controller]")]
 public class PokemonController : ControllerBase
 {
-    private readonly IHttpClientFactory _httpClientFactory;
-    private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true };
-
-    public PokemonController(IHttpClientFactory httpClientFactory)
-    {
-        _httpClientFactory = httpClientFactory;
-    }
-
     [HttpGet]
     public async Task<ActionResult<PokemonListResponse>> GetAll()
     {
-        var client = _httpClientFactory.CreateClient("PokeApi");
+        var client = new HttpClient();
+        client.BaseAddress = new Uri("https://pokeapi.co/api/v2/");
         var response = await client.GetAsync($"pokemon");
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync();
         var node = JsonNode.Parse(json)!;
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
         int count = node["count"]!.GetValue<int>();
         var results = node["results"]!.AsArray()
@@ -43,7 +37,8 @@ public class PokemonController : ControllerBase
     [HttpGet("{idOrName}")]
     public async Task<ActionResult<PokemonDetail>> GetById(string idOrName)
     {
-        var client = _httpClientFactory.CreateClient("PokeApi");
+        var client = new HttpClient();
+        client.BaseAddress = new Uri("https://pokeapi.co/api/v2/");
         var response = await client.GetAsync($"pokemon/{idOrName}");
 
         if (response.StatusCode == System.Net.HttpStatusCode.NotFound)

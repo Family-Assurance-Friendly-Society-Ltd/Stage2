@@ -1,15 +1,14 @@
-import { useEffect, useState, useCallback } from 'react';
-import type { PokemonListItem, PokemonListResponse } from './types/pokemon';
-import PokemonCard from './components/PokemonCard';
-import SearchBar from './components/SearchBar';
-import './App.css';
-
+import { useEffect, useState, useCallback } from "react";
+import type { PokemonListItem, PokemonListResponse } from "./types/pokemon";
+import PokemonCard from "./components/PokemonCard";
+import SearchBar from "./components/SearchBar";
+import "./App.css";
 
 export default function App() {
   const [allPokemon, setAllPokemon] = useState<PokemonListItem[]>([]);
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,13 +16,15 @@ export default function App() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`api/pokemon`);
+      const res = await fetch(`/api/pokemon`);
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
       const data: PokemonListResponse = await res.json();
       setTotalCount(data.count);
-      setAllPokemon((prev) => (pageNum === 1 ? data.results : [...prev, ...data.results]));
+      setAllPokemon((prev) =>
+        pageNum === 1 ? data.results : [...prev, ...data.results],
+      );
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
       setLoading(false);
     }
@@ -40,7 +41,9 @@ export default function App() {
   };
 
   const filtered = search.trim()
-    ? allPokemon.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
+    ? allPokemon.filter((p) =>
+        p.name.toLowerCase().includes(search.toLowerCase()),
+      )
     : allPokemon;
 
   const hasMore = allPokemon.length < totalCount && !search.trim();
@@ -51,7 +54,9 @@ export default function App() {
         <h1>Pokédex</h1>
         <SearchBar value={search} onChange={setSearch} />
         <span className="count-label">
-          {search.trim() ? `${filtered.length} match${filtered.length !== 1 ? 'es' : ''}` : `${allPokemon.length} / ${totalCount} loaded`}
+          {search.trim()
+            ? `${filtered.length} match${filtered.length !== 1 ? "es" : ""}`
+            : `${allPokemon.length} / ${totalCount} loaded`}
         </span>
       </header>
 
